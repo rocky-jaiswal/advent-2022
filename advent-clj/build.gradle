@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
   implementation 'org.clojure:clojure:1.11.1'
+  implementation 'org.clojure:core.match:1.0.0'
 
   testRuntimeOnly 'org.ajoberstar:jovial:0.3.0'
 

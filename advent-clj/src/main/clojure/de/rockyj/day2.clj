@@ -52,7 +52,6 @@
          (map calc-score)
          (reduce +))))
 
-
 (defn part-2 []
   (let [raw-input (utils/read-file "day2.txt")]
     (->> raw-input

@@ -5,8 +5,8 @@ import kotlin.math.abs
 data class File(val name: String, val size: Long = 0L)
 
 class Directory(val name: String, val isRoot: Boolean = false) {
-    var subDirectories: List<Directory> = mutableListOf<Directory>()
-    var files: List<File> = mutableListOf<File>()
+    var subDirectories: List<Directory> = mutableListOf()
+    var files: List<File> = mutableListOf()
     var totalSize = 0L
 
     override fun toString(): String {
@@ -15,8 +15,8 @@ class Directory(val name: String, val isRoot: Boolean = false) {
 }
 
 class FileSystem(val rootDirectory: Directory) {
-    var smallDirectories: List<Directory> = mutableListOf<Directory>()
-    var smallDirectories2: List<Directory> = mutableListOf<Directory>()
+    var smallDirectories: List<Directory> = mutableListOf()
+    var smallDirectories2: List<Directory> = mutableListOf()
     private var activeDirectory = rootDirectory
 
     fun changeActiveDirectory(dirName: String) {
@@ -51,7 +51,7 @@ class FileSystem(val rootDirectory: Directory) {
         if (dir.subDirectories.isEmpty()) {
             return dir.files.sumOf { f -> f.size }
         }
-        return dir.files.map { f -> f.size }.sum() + dir.subDirectories.map { sd -> getSubSize(sd) }.sum()
+        return dir.files.sumOf { f -> f.size } + dir.subDirectories.sumOf { sd -> getSubSize(sd) }
     }
 
     fun traverseForSize(dir: Directory = this.rootDirectory) {
@@ -100,9 +100,9 @@ fun isFile(line: String): Boolean {
     return line.matches(Regex("""^(\d+)(\s)(.*)"""))
 }
 
-private fun buildFS(input: List<String>): Unit {
+private fun buildFS(input: List<String>) {
     val rootDirectory = Directory("/", true)
-    val fileSystem: FileSystem = FileSystem(rootDirectory)
+    val fileSystem = FileSystem(rootDirectory)
 
     input.map { it.trim() }.forEach {line ->
         if (isChangeDirectoryCommand(line)) {
@@ -138,5 +138,5 @@ private fun buildFS(input: List<String>): Unit {
 
 fun main() {
     val lines = fileToArr("day7_2.txt")
-    println(buildFS(lines))
+    (buildFS(lines))
 }

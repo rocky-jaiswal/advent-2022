@@ -6,8 +6,7 @@ import kotlin.math.sqrt
 private class Knot {
     var positions = listOf<Pair<Int, Int>>(Pair(0,0))
 
-    constructor() {
-    }
+    constructor()
 
     constructor(positions: List<Pair<Int, Int>>) {
         this.positions = positions
@@ -38,10 +37,6 @@ private fun updateHeadPosition(direction: String, headPositions: List<Pair<Int, 
 private fun updateTailPosition(headPositions: List<Pair<Int, Int>>, tailPositions: List<Pair<Int, Int>>): Pair<Int, Int>? {
      val lastPosHead = headPositions.last()
      val lastPosTail = tailPositions.last()
-
-    // println(headPosition)
-    // println(tailPosition)
-    // println("=======")
 
     if (lastPosHead.first == lastPosTail.first && lastPosHead.second == lastPosTail.second) {
         return null
